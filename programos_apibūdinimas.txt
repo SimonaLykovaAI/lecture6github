@@ -1,0 +1,6 @@
+1. Reikalavimai programai:
+2. Naudos streamlit sąsają su naršykle.
+3. Naudos ollama modelį gemma:4b.
+4. Vartotojas įkels paveiksėlį, ir dirbtinis intelektas apibūdins jo turinį.
+
+ollama ir streamlit dokumentaciją gali rasti docs aplanke.
