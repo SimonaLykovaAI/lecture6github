@@ -26,6 +26,9 @@ default_prompt = (
 
 prompt = st.text_area("Klausimas modeliui", value=default_prompt, height=120)
 
+# Naujas laukas: konkretus klausimas apie įkeltą paveikslėlį
+question = st.text_input("Klausimas apie paveikslėlį (pasirinktinai)", value="", placeholder="Ką norite sužinoti apie šį paveikslėlį?")
+
 if uploaded_file is not None:
     # Read bytes for both display and model
     image_bytes = uploaded_file.read()
@@ -39,10 +42,15 @@ if uploaded_file is not None:
     if st.button("Apibūdinti paveikslėlį"):
         with st.spinner("Kreipiamasi į modelį..."):
             try:
+                # Sudaryti užklausos turinį: pagrindinis promptas + (pasirinktinai) konkretus klausimas
+                final_content = prompt
+                if question and question.strip():
+                    final_content = f"{prompt}\n\nKlausimas apie paveikslėlį: {question.strip()}"
+
                 messages = [
                     {
                         "role": "user",
-                        "content": prompt,
+                        "content": final_content,
                         "images": [image_bytes],
                     }
                 ]
